@@ -26,6 +26,13 @@ function getErrorMessage(err) {
     if (typeof err === "string") {
         return err;
     }
-    return ((err && err.message ? err.message : "Unknown Error") || "Unknown Error");
+    if (err === null || err === void 0 ? void 0 : err.message) {
+        var dataString = "";
+        if (response === null || response === void 0 ? void 0 : response.data) {
+            dataString = " data ➡️ " + JSON.stringify(response.data, null, 2);
+        }
+        return err.message + dataString;
+    }
+    return "Unknown Error";
 }
 exports.getErrorMessage = getErrorMessage;

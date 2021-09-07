@@ -21,11 +21,21 @@ export function getErrorMessage(err: any): string {
     }
   }
 
+  
   if (typeof err === "string") {
     return err;
   }
+  
+  if(err?.message) {
+    let dataString = ""
+    
+    if(response?.data){
+      
+      dataString = " data ➡️ " + JSON.stringify(response.data, null, 2);
+    }
+    return err.message + dataString;
+  }
+  
 
-  return (
-    (err && err.message ? err.message : "Unknown Error") || "Unknown Error"
-  );
+  return "Unknown Error"
 }
